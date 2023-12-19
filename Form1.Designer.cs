@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(spaceracer));
             this.Titlelable = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Finishlinelable = new System.Windows.Forms.Label();
             this.Score1lable = new System.Windows.Forms.Label();
             this.Score2lable = new System.Windows.Forms.Label();
@@ -41,31 +40,22 @@
             // 
             // Titlelable
             // 
-            this.Titlelable.BackColor = System.Drawing.Color.Black;
-            this.Titlelable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Titlelable.BackColor = System.Drawing.Color.Transparent;
             this.Titlelable.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Titlelable.ForeColor = System.Drawing.Color.White;
-            this.Titlelable.Location = new System.Drawing.Point(176, 130);
+            this.Titlelable.Location = new System.Drawing.Point(3, 54);
             this.Titlelable.Name = "Titlelable";
-            this.Titlelable.Size = new System.Drawing.Size(463, 84);
+            this.Titlelable.Size = new System.Drawing.Size(699, 84);
             this.Titlelable.TabIndex = 0;
             this.Titlelable.Text = "Titlelable";
             this.Titlelable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(406, 306);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 16);
-            this.label2.TabIndex = 1;
-            // 
             // Finishlinelable
             // 
             this.Finishlinelable.Image = ((System.Drawing.Image)(resources.GetObject("Finishlinelable.Image")));
-            this.Finishlinelable.Location = new System.Drawing.Point(0, -1);
+            this.Finishlinelable.Location = new System.Drawing.Point(-32, -1);
             this.Finishlinelable.Name = "Finishlinelable";
-            this.Finishlinelable.Size = new System.Drawing.Size(801, 23);
+            this.Finishlinelable.Size = new System.Drawing.Size(734, 23);
             this.Finishlinelable.TabIndex = 2;
             // 
             // Score1lable
@@ -73,7 +63,7 @@
             this.Score1lable.BackColor = System.Drawing.Color.Transparent;
             this.Score1lable.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Score1lable.ForeColor = System.Drawing.Color.White;
-            this.Score1lable.Location = new System.Drawing.Point(138, 22);
+            this.Score1lable.Location = new System.Drawing.Point(76, 22);
             this.Score1lable.Name = "Score1lable";
             this.Score1lable.Size = new System.Drawing.Size(151, 23);
             this.Score1lable.TabIndex = 4;
@@ -85,7 +75,7 @@
             this.Score2lable.BackColor = System.Drawing.Color.Transparent;
             this.Score2lable.Font = new System.Drawing.Font("MS Reference Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Score2lable.ForeColor = System.Drawing.Color.White;
-            this.Score2lable.Location = new System.Drawing.Point(511, 22);
+            this.Score2lable.Location = new System.Drawing.Point(473, 22);
             this.Score2lable.Name = "Score2lable";
             this.Score2lable.Size = new System.Drawing.Size(153, 23);
             this.Score2lable.TabIndex = 5;
@@ -94,13 +84,12 @@
             // 
             // Subtitlelable
             // 
-            this.Subtitlelable.BackColor = System.Drawing.Color.Black;
-            this.Subtitlelable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Subtitlelable.BackColor = System.Drawing.Color.Transparent;
             this.Subtitlelable.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Subtitlelable.ForeColor = System.Drawing.Color.White;
-            this.Subtitlelable.Location = new System.Drawing.Point(216, 231);
+            this.Subtitlelable.Location = new System.Drawing.Point(3, 167);
             this.Subtitlelable.Name = "Subtitlelable";
-            this.Subtitlelable.Size = new System.Drawing.Size(389, 112);
+            this.Subtitlelable.Size = new System.Drawing.Size(699, 112);
             this.Subtitlelable.TabIndex = 6;
             this.Subtitlelable.Text = "Subtitlelable";
             this.Subtitlelable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -116,12 +105,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 400);
+            this.ClientSize = new System.Drawing.Size(700, 400);
             this.Controls.Add(this.Subtitlelable);
             this.Controls.Add(this.Score2lable);
             this.Controls.Add(this.Score1lable);
             this.Controls.Add(this.Finishlinelable);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.Titlelable);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -132,14 +120,12 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.spaceracer_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.spaceracer_KeyUp);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label Titlelable;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Finishlinelable;
         private System.Windows.Forms.Label Score1lable;
         private System.Windows.Forms.Label Score2lable;
