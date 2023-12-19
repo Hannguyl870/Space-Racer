@@ -31,8 +31,8 @@ namespace Space_Race
 
         string mainmenue = "waiting";
 
-        Rectangle player1 = new Rectangle(150, 200, 25, 40);
-        Rectangle player2 = new Rectangle(350, 270, 25, 40);
+        Rectangle player1 = new Rectangle(150, 300, 15, 20);
+        Rectangle player2 = new Rectangle(350, 300, 15, 20);
 
         Rectangle line = new Rectangle(260, 40, 10, 300);
 
@@ -179,29 +179,29 @@ namespace Space_Race
 
             //Titlelable.Visible = false;
             //Subtitlelable.Visible = false;
-         
 
 
-            if (wDown == true && player2.Y > 0)
+            if (upArrowDown == true && player2.Y > Finishlinelable.Height-3)
             {
-                player2.Y -= player2Speed;
+                player2.Y -= player1Speed;
+            }
+            if (downArrowDown == true && player1.Y < this.Height - player2.Height)
+            {
+                player2.Y += player1Speed;
             }
 
-            if (sDown == true && player2.Y < this.Height - player2.Height)
+
+            if (wDown == true && player1.Y > Finishlinelable.Height-3)
             {
-                player2.Y += player2Speed;
+                player1.Y -= player2Speed;
+            }
+
+            if (sDown == true && player1.Y < this.Height - player1.Height)
+            {
+                player1.Y += player2Speed;
             }
 
             
-
-            if (upArrowDown == true && player1.Y > 0)
-            {
-                player1.Y -= player1Speed;
-            }
-            if (downArrowDown == true && player1.Y < this.Height - player1.Height)
-            {
-                player1.Y += player1Speed;
-            }
 
             randValue = randgen.Next(1, 100);
 
@@ -210,8 +210,8 @@ namespace Space_Race
 
                 astroidspeed.Add(randgen.Next(2, 11));
                 astroidsize.Add(randgen.Next(5, 15));
-                int x = randgen.Next(1, 550);
-                Rectangle newastroid = new Rectangle(x, 0, 20, 20);
+                int y = randgen.Next(1, 550);
+                Rectangle newastroid = new Rectangle(0, y, 20, 20);
                 astroids.Add(newastroid);
                
 
@@ -220,8 +220,11 @@ namespace Space_Race
             for (int i = 0; i < astroids.Count(); i++)
             {
                 //get new possision of y based on speed
-                int x = astroids[i].X + astroidspeed[i];
-                astroids[i] = new Rectangle(astroids[i].Y, x, astroidsize[i], astroidsize[i]);
+                //int y = astroids[i].Y + astroidspeed[i];
+                //astroids[i] = new Rectangle(astroids[i].Y,x, astroidsize[i], astroidsize[i]);
+
+                int y = astroids[i].Y + astroidspeed[i];
+                astroids[i] = new Rectangle(0,y,astroidsize[i],astroidsize[i]);
             }
 
             for (int i = 0; i < astroids.Count(); i++)
@@ -232,6 +235,7 @@ namespace Space_Race
                     astroids.RemoveAt(i);
                     astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
+                    player1.Y = 300;
 
                 }
                 else if (astroids[i].IntersectsWith(player2))
@@ -239,6 +243,20 @@ namespace Space_Race
                     astroids.RemoveAt(i);
                    astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
+                    player2.Y = 300;
+                }
+                else if (player1.Y < Finishlinelable.Height)
+                {
+                    player1.Y = 300;
+                    player1score++;
+
+                    Score1lable.Text = $"{player1score}";
+                }
+                else if (player2.Y < Finishlinelable.Height)
+                {
+                    player2.Y = 300;
+                    player2score++;
+                    Score2lable.Text = $"{player2score}";
                 }
             }
             Refresh();
