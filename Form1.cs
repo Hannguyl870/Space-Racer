@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Space_Race
@@ -14,12 +15,15 @@ namespace Space_Race
 
     public partial class spaceracer : Form
     {
+        SoundPlayer sp;
+
         bool wDown = false;
         bool sDown = false;
         bool upArrowDown = false;
         bool downArrowDown = false;
 
-        List<Rectangle> astroids = new List<Rectangle>();
+        List<Rectangle> astroids1 = new List<Rectangle>();
+        List<Rectangle> astroids2 = new List<Rectangle>();
 
         List<int> astroidspeed = new List<int>();
         List<int> astroidsize = new List<int>();
@@ -40,6 +44,7 @@ namespace Space_Race
         int player2score = 0;
         int player2Speed = 4;
         int player1Speed = 4;
+       
 
         Random randgen = new Random();
         int randValue = 0;
@@ -60,7 +65,8 @@ namespace Space_Race
             player1score = 0;
             player2score = 0;
 
-            astroids.Clear();
+            astroids1.Clear();
+            astroids2.Clear();
             astroidspeed.Clear();
          
 
@@ -77,25 +83,29 @@ namespace Space_Race
             {
                 case Keys.W:
                     wDown = true;
+                   
                     break;
                 case Keys.S:
                     sDown = true;
+                   
                     break;
                 case Keys.Up:
                     upArrowDown = true;
+                   
                     break;
                 case Keys.Down:
                     downArrowDown = true;
+                    
                     break;
                
                 case Keys.Space:
-                    if (mainmenue == "waiting" || mainmenue == "gameover" || mainmenue == "winning")
+                    if (mainmenue == "waiting" || mainmenue == "player1winning" || mainmenue == "player2winning")
                     {
                         GameInitialize();
                     }
                     break;
                 case Keys.Escape:
-                    if (mainmenue == "waiting" || mainmenue == "gameover")
+                    if (mainmenue == "waiting" || mainmenue == "player1winning"|| mainmenue == "player2winning")
                     {
                         this.Close();
                     }
@@ -109,15 +119,19 @@ namespace Space_Race
             {
                 case Keys.W:
                     wDown = false;
+                   
                     break;
                 case Keys.S:
                     sDown = false;
+                   
                     break;
                 case Keys.Up:
                     upArrowDown = false;
+                   
                     break;
                 case Keys.Down:
                     downArrowDown = false;
+                   
                     break;
             }
         }
@@ -133,23 +147,34 @@ namespace Space_Race
                 Titlelable.Text = "SPACE RACER";
                 Subtitlelable.Text = "Press Space to start or Esc to exit";
                 
-
             }
-            else if (mainmenue == "gameover")
+           
+            else if (mainmenue == "player1winning")
             {
+                Titlelable.Visible = true;
+                Subtitlelable.Visible = true;
 
-                Score1lable.Text = $"Player 1 Score: {player1score}";
-                Score2lable.Text = $"Player 2 Score: {player2score}";
+                Score1lable.Text = "You Win";
+                Score2lable.Text = "You lose";
 
-                Titlelable.Text = "GAME OVER";
+                Titlelable.Text = "player 1 wins ";
                 Subtitlelable.Text = "Press Space to start or Esc to exit";
+
+               
                 Astroidtimer.Enabled = false;
             }
-            else if (mainmenue == "winning")
+            else if (mainmenue == "player2winning")
             {
+              
+                Titlelable.Visible = true;
+                Subtitlelable.Visible = true;
 
-                Titlelable.Text = "GAME OVER";
+                Score1lable.Text = "You lose";
+                Score2lable.Text = "you win";
+
+                Titlelable.Text = "player 2 wins ";
                 Subtitlelable.Text = "Press Space to start or Esc to exit";
+
                 Astroidtimer.Enabled = false;
             }
             else if (mainmenue == "running")
@@ -167,12 +192,18 @@ namespace Space_Race
                 e.Graphics.FillRectangle(whiteBrush, line);
 
                 //draw balls
-                for (int i = 0; i < astroids.Count(); i++)
+                for (int i = 0; i < astroids1.Count(); i++)
                 {
-                    e.Graphics.FillEllipse(whiteBrush, astroids[i]);
+                    e.Graphics.FillEllipse(whiteBrush, astroids1[i]);
                 }
                 Astroidtimer.Enabled = true;
-        }   }
+
+                for (int i = 0; i < astroids2.Count(); i++)
+                {
+                    e.Graphics.FillEllipse(whiteBrush, astroids2[i]);
+                }
+                Astroidtimer.Enabled = true;
+            }   }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -184,67 +215,95 @@ namespace Space_Race
             if (upArrowDown == true && player2.Y > Finishlinelable.Height-3)
             {
                 player2.Y -= player1Speed;
+               
             }
-            if (downArrowDown == true && player1.Y < this.Height - player2.Height)
+            if (downArrowDown == true && player2.Y < this.Height - player2.Height)
             {
                 player2.Y += player1Speed;
+               
             }
 
 
             if (wDown == true && player1.Y > Finishlinelable.Height-3)
             {
                 player1.Y -= player2Speed;
+               
             }
 
             if (sDown == true && player1.Y < this.Height - player1.Height)
             {
                 player1.Y += player2Speed;
+               
             }
 
             
+            // make balls
+            randValue = randgen.Next(1, 10);
 
-            randValue = randgen.Next(1, 100);
-
-            if (randValue < 50)
+            if (randValue < 2)
             {
 
-                astroidspeed.Add(randgen.Next(2, 11));
+                astroidspeed.Add(randgen.Next(1,5));
                 astroidsize.Add(randgen.Next(5, 15));
-                int y = randgen.Next(1, 550);
-                Rectangle newastroid = new Rectangle(0, y, 20, 20);
-                astroids.Add(newastroid);
+                int y = randgen.Next(20, 400);
+                Rectangle newastroid1 = new Rectangle(0, y, 20, 20);
+                astroids1.Add(newastroid1);
                
 
             }
+            if (randValue > 8)
+            {
+                astroidspeed.Add(randgen.Next(1, 5));
+                astroidsize.Add(randgen.Next(5, 15));
+                int y = randgen.Next(20, 400);
+                Rectangle newastroid2 = new Rectangle(800, y, 20, 20);
+                astroids2.Add(newastroid2);
+            }
             //Move all the balls
-            for (int i = 0; i < astroids.Count(); i++)
+            randValue = randgen.Next(1, 800);
+            for (int i = 0; i < astroids1.Count(); i++)
             {
                 //get new possision of y based on speed
-                //int y = astroids[i].Y + astroidspeed[i];
-                //astroids[i] = new Rectangle(astroids[i].Y,x, astroidsize[i], astroidsize[i]);
-
-                int y = astroids[i].Y + astroidspeed[i];
-                astroids[i] = new Rectangle(0,y,astroidsize[i],astroidsize[i]);
+                
+                int x = astroids1[i].X + astroidspeed[i] ;
+                astroids1[i] = new Rectangle(x,astroids1[i].Y,astroidsize[i],astroidsize[i]);
+                
             }
 
-            for (int i = 0; i < astroids.Count(); i++)
+            for (int i = 0; i < astroids2.Count(); i++)
+            {
+                //get new possision of y based on speed
+
+                int x = astroids2[i].X - astroidspeed[i];
+                astroids2[i] = new Rectangle(x, astroids2[i].Y, astroidsize[i], astroidsize[i]);
+               
+            }
+
+            for (int i = 0; i < astroids1.Count(); i++)
             {
 
-                if (astroids[i].IntersectsWith(player1))
+                if (astroids1[i].IntersectsWith(player1))
                 {
-                    astroids.RemoveAt(i);
+                    astroids1.RemoveAt(i);
                     astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player1.Y = 300;
+                    sp = new SoundPlayer(Properties.Resources.explotion);
+                    sp.Play();
 
                 }
-                else if (astroids[i].IntersectsWith(player2))
+               
+                else if (astroids1[i].IntersectsWith(player2))
                 {
-                    astroids.RemoveAt(i);
+                    astroids1.RemoveAt(i);
                    astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player2.Y = 300;
+                    sp = new SoundPlayer(Properties.Resources.explotion);
+                    sp.Play();
                 }
+            
+
                 else if (player1.Y < Finishlinelable.Height)
                 {
                     player1.Y = 300;
@@ -258,7 +317,57 @@ namespace Space_Race
                     player2score++;
                     Score2lable.Text = $"{player2score}";
                 }
+
+                if (player1score == 2)
+                {
+                    Astroidtimer.Enabled = false;
+                    mainmenue = "player1winning";
+                }
+                else if (player2score == 2)
+                {
+                    Astroidtimer.Enabled = false;
+                    mainmenue = "player2winning";
+                }
             }
+            for (int i = 0; i < astroids2.Count(); i++)
+            {
+                //astroids2 
+                if (astroids2[i].IntersectsWith(player1))
+                {
+                    astroids2.RemoveAt(i);
+                    astroidspeed.RemoveAt(i);
+                    astroidsize.RemoveAt(i);
+                    player1.Y = 300;
+                    sp = new SoundPlayer(Properties.Resources.explotion);
+                    sp.Play();
+                }
+                else if (astroids2[i].IntersectsWith(player2))
+                {
+                    astroids2.RemoveAt(i);
+                    astroidspeed.RemoveAt(i);
+                    astroidsize.RemoveAt(i);
+                    player2.Y = 300;
+                    sp = new SoundPlayer(Properties.Resources.explotion);
+                    sp.Play();
+                }
+                else if (player2.Y < Finishlinelable.Height)
+                {
+                    player2.Y = 300;
+                    player2score++;
+                    Score2lable.Text = $"{player2score}";
+                }
+                if (player1score == 2)
+                {
+                    Astroidtimer.Enabled = false;
+                    mainmenue = "player1winning";
+                }
+                else if (player2score == 2)
+                {
+                    Astroidtimer.Enabled = false;
+                    mainmenue = "player2winning";
+                }
+            }
+               
             Refresh();
         }
     }

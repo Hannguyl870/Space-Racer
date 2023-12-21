@@ -96,7 +96,7 @@
             // 
             // Astroidtimer
             // 
-            this.Astroidtimer.Interval = 50;
+            this.Astroidtimer.Interval = 20;
             this.Astroidtimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // spaceracer
