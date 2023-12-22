@@ -89,5 +89,8 @@
   <ItemGroup>
     <None Include="Resources\430058__manimato2__explosion.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

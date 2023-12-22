@@ -15,6 +15,7 @@ namespace Space_Race
 
     public partial class spaceracer : Form
     {
+
         SoundPlayer sp;
 
         bool wDown = false;
@@ -32,13 +33,20 @@ namespace Space_Race
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
-
+        Pen white = new Pen(Color.White);
         string mainmenue = "waiting";
 
         Rectangle player1 = new Rectangle(150, 300, 15, 20);
         Rectangle player2 = new Rectangle(350, 300, 15, 20);
 
+        Rectangle lighta = new Rectangle(150, 320, 5, 10);
+        Rectangle lightb = new Rectangle(160, 320, 5, 10);
+
+        //PictureBox flame1 = new PictureBox();
+
         Rectangle line = new Rectangle(260, 40, 10, 300);
+
+        int light1speed = 4;
 
         int player1score = 0;
         int player2score = 0;
@@ -55,6 +63,7 @@ namespace Space_Race
         }
         public void GameInitialize()
         {
+
             Titlelable.Visible = false;
             Subtitlelable.Visible = false;
             Titlelable.Text = "";
@@ -138,7 +147,8 @@ namespace Space_Race
 
         private void spaceracer_Paint(object sender, PaintEventArgs e)
         {
-           
+            Graphics g = this.CreateGraphics();
+
             if (mainmenue == "waiting")
             {
 
@@ -191,6 +201,13 @@ namespace Space_Race
                 e.Graphics.FillRectangle(yellowBrush, player2);
                 e.Graphics.FillRectangle(whiteBrush, line);
 
+                e.Graphics.FillRectangle(yellowBrush, lighta);
+                e.Graphics.FillRectangle(yellowBrush, lightb);
+
+
+                //g.DrawPie(white, -25, 6, 90, 90, 30, 60);
+                //e.Graphics.FillPie(whiteBrush, rocket);
+
                 //draw balls
                 for (int i = 0; i < astroids1.Count(); i++)
                 {
@@ -215,7 +232,8 @@ namespace Space_Race
             if (upArrowDown == true && player2.Y > Finishlinelable.Height-3)
             {
                 player2.Y -= player1Speed;
-               
+                
+                
             }
             if (downArrowDown == true && player2.Y < this.Height - player2.Height)
             {
@@ -226,8 +244,11 @@ namespace Space_Race
 
             if (wDown == true && player1.Y > Finishlinelable.Height-3)
             {
-                player1.Y -= player2Speed;
                
+                player1.Y -= player1Speed;
+                //lighta.Y -= light1speed;
+                //lightb.Y -= light1speed;
+
             }
 
             if (sDown == true && player1.Y < this.Height - player1.Height)
@@ -235,6 +256,7 @@ namespace Space_Race
                 player1.Y += player2Speed;
                
             }
+            
 
             
             // make balls
@@ -366,6 +388,7 @@ namespace Space_Race
                     Astroidtimer.Enabled = false;
                     mainmenue = "player2winning";
                 }
+
             }
                
             Refresh();
