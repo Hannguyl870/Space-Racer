@@ -250,7 +250,6 @@ namespace Space_Race
                 lightd.Y += playerSpeed;
             }
 
-
             if (wDown == true && player1.Y > Finishlinelable.Height-3)
             {
                
@@ -348,6 +347,8 @@ namespace Space_Race
                     player1score++;
 
                     Score1lable.Text = $"{player1score}";
+                    sp = new SoundPlayer(Properties.Resources.point);
+                    sp.Play();
                 }
                 else if (player2.Y < Finishlinelable.Height)
                 {
@@ -356,6 +357,8 @@ namespace Space_Race
                     lightd.Y = 320;
                     player2score++;
                     Score2lable.Text = $"{player2score}";
+                    sp = new SoundPlayer(Properties.Resources.point);
+                    sp.Play();
                 }
 
                 if (player1score == 2)
@@ -394,14 +397,7 @@ namespace Space_Race
                     sp = new SoundPlayer(Properties.Resources.explotion);
                     sp.Play();
                 }
-                else if (player2.Y < Finishlinelable.Height)
-                {
-                    player2.Y = 300;
-                    lightc.Y = 320;
-                    lightd.Y = 320;
-                    player2score++;
-                    Score2lable.Text = $"{player2score}";
-                }
+               
                 if (player1score == 2)
                 {
                     Astroidtimer.Enabled = false;

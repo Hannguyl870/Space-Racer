@@ -92,5 +92,8 @@
   <ItemGroup>
     <None Include="Resources\R-removebg-preview.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\350864__cabled_mess__blip_c_02.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
