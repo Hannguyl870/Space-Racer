@@ -33,6 +33,7 @@ namespace Space_Race
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SolidBrush orangeBrush = new SolidBrush(Color.Orange);
         Pen white = new Pen(Color.White);
         string mainmenue = "waiting";
 
@@ -42,16 +43,19 @@ namespace Space_Race
         Rectangle lighta = new Rectangle(150, 320, 5, 10);
         Rectangle lightb = new Rectangle(160, 320, 5, 10);
 
+        Rectangle lightc = new Rectangle(350, 320, 5, 10);
+        Rectangle lightd = new Rectangle(360, 320, 5, 10);
+
         //PictureBox flame1 = new PictureBox();
 
         Rectangle line = new Rectangle(260, 40, 10, 300);
 
-        int light1speed = 4;
+      
 
         int player1score = 0;
         int player2score = 0;
-        int player2Speed = 4;
-        int player1Speed = 4;
+        
+        int playerSpeed = 4;
        
 
         Random randgen = new Random();
@@ -204,6 +208,9 @@ namespace Space_Race
                 e.Graphics.FillRectangle(yellowBrush, lighta);
                 e.Graphics.FillRectangle(yellowBrush, lightb);
 
+                e.Graphics.FillRectangle(orangeBrush, lightc);
+                e.Graphics.FillRectangle(orangeBrush, lightd);
+
 
                 //g.DrawPie(white, -25, 6, 90, 90, 30, 60);
                 //e.Graphics.FillPie(whiteBrush, rocket);
@@ -231,30 +238,32 @@ namespace Space_Race
 
             if (upArrowDown == true && player2.Y > Finishlinelable.Height-3)
             {
-                player2.Y -= player1Speed;
-                
-                
+                player2.Y -= playerSpeed;
+                lightc.Y -= playerSpeed;
+                lightd.Y -= playerSpeed;
+
             }
             if (downArrowDown == true && player2.Y < this.Height - player2.Height)
             {
-                player2.Y += player1Speed;
-               
+                player2.Y += playerSpeed;
+                lightc.Y += playerSpeed;
+                lightd.Y += playerSpeed;
             }
 
 
             if (wDown == true && player1.Y > Finishlinelable.Height-3)
             {
                
-                player1.Y -= player1Speed;
-                //lighta.Y -= light1speed;
-                //lightb.Y -= light1speed;
-
+                player1.Y -= playerSpeed;
+                lighta.Y -= playerSpeed;
+                lightb.Y -= playerSpeed;
             }
 
             if (sDown == true && player1.Y < this.Height - player1.Height)
             {
-                player1.Y += player2Speed;
-               
+                player1.Y += playerSpeed;
+                lighta.Y += playerSpeed;
+                lightb.Y += playerSpeed;
             }
             
 
@@ -310,6 +319,8 @@ namespace Space_Race
                     astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player1.Y = 300;
+                    lighta.Y = 320;
+                    lightb.Y = 320;
                     sp = new SoundPlayer(Properties.Resources.explotion);
                     sp.Play();
 
@@ -321,6 +332,9 @@ namespace Space_Race
                    astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player2.Y = 300;
+                    lightc.Y = 320;
+                    lightd.Y = 320;
+
                     sp = new SoundPlayer(Properties.Resources.explotion);
                     sp.Play();
                 }
@@ -329,6 +343,8 @@ namespace Space_Race
                 else if (player1.Y < Finishlinelable.Height)
                 {
                     player1.Y = 300;
+                    lighta.Y = 320;
+                    lightb.Y = 320;
                     player1score++;
 
                     Score1lable.Text = $"{player1score}";
@@ -336,6 +352,8 @@ namespace Space_Race
                 else if (player2.Y < Finishlinelable.Height)
                 {
                     player2.Y = 300;
+                    lightc.Y = 320;
+                    lightd.Y = 320;
                     player2score++;
                     Score2lable.Text = $"{player2score}";
                 }
@@ -360,6 +378,8 @@ namespace Space_Race
                     astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player1.Y = 300;
+                    lighta.Y = 320;
+                    lightb.Y = 320;
                     sp = new SoundPlayer(Properties.Resources.explotion);
                     sp.Play();
                 }
@@ -369,12 +389,16 @@ namespace Space_Race
                     astroidspeed.RemoveAt(i);
                     astroidsize.RemoveAt(i);
                     player2.Y = 300;
+                    lightc.Y = 320;
+                    lightd.Y = 320;
                     sp = new SoundPlayer(Properties.Resources.explotion);
                     sp.Play();
                 }
                 else if (player2.Y < Finishlinelable.Height)
                 {
                     player2.Y = 300;
+                    lightc.Y = 320;
+                    lightd.Y = 320;
                     player2score++;
                     Score2lable.Text = $"{player2score}";
                 }
